@@ -25,6 +25,16 @@ app.post('/items', (req, res)=> {
     }else{
         res.status(404).send("item not found");
     }
+  });
+  app.delete('/items/:id', (req, res)=> {
+    const id=parseInt(req.params.id);
+    const index=items.findIndex(i=>i.id==id);
+    if(index){
+        const deleteItems=items.splice(index,1);
+        res.json(deleteItems);
+    }else{
+        res.status(404).send("itmes not found")
+    }
   })
 app.listen(port,()=>{
     console.log(` server is listening on ${port}`);
